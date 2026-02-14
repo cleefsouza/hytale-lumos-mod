@@ -1,0 +1,20 @@
+{
+  "Group": "br.pepola.mod",
+  "Name": "OrbLuminous",
+  "Version": "0.1.0",
+  "Description": "Orb que acompanha o player e ilumina o seu caminho",
+  "Authors": [
+    {
+      "Name": "pepola",
+      "Email": "a.cleef.souza@gmail.com",
+      "Url": "https://github.com/cleefsouza"
+    }
+  ],
+  "Main": "br.pepola.mod.OrbMod",
+  "Website": "",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true
+}
