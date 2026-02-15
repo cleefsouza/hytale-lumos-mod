@@ -13,7 +13,7 @@ public class CommandCenter extends AbstractCommandCollection {
     private final HytaleLogger logger;
 
     public CommandCenter(HytaleLogger logger, Manager manager) {
-        super("orb", "Central de comandos do plugin");
+        super("lumos", "Central de comandos do plugin");
 
         this.logger = logger.getSubLogger(SUB_LOGGER);
 
