@@ -1,8 +1,8 @@
 {
   "Group": "br.pepola.mod",
-  "Name": "OrbLuminous",
+  "Name": "Lumos",
   "Version": "0.1.0",
-  "Description": "Orb que acompanha o player e ilumina o seu caminho",
+  "Description": "Comando para iluminar o caminho do player",
   "Authors": [
     {
       "Name": "pepola",
@@ -10,7 +10,7 @@
       "Url": "https://github.com/cleefsouza"
     }
   ],
-  "Main": "br.pepola.mod.OrbMod",
+  "Main": "br.pepola.mod.LumosPlugin",
   "Website": "",
   "ServerVersion": "*",
   "Dependencies": {},
