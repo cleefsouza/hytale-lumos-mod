@@ -1,6 +1,6 @@
 package br.pepola.mod.commands;
 
-import br.pepola.mod.manager.OrbManager;
+import br.pepola.mod.manager.Manager;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.Message;
@@ -15,14 +15,14 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class OrbCommandOff extends CommandBase {
+public class LumosCommandOff extends CommandBase {
 
     private final String SUB_LOGGER = "OFF";
     private final HytaleLogger logger;
-    private final OrbManager manager;
+    private final Manager manager;
 
-    public OrbCommandOff(HytaleLogger logger, OrbManager manager) {
-        super("off", "Power OFF Command (OFF)");
+    public LumosCommandOff(HytaleLogger logger, Manager manager) {
+        super("off", "Comando para desativar o Lumos (OFF)");
 
         this.logger = logger.getSubLogger(SUB_LOGGER);
         this.manager = manager;
@@ -31,11 +31,11 @@ public class OrbCommandOff extends CommandBase {
     @SuppressWarnings("removal")
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Turn OFF orb");
+        this.logger.at(Level.INFO).log("Lumos OFF");
 
         if (!commandContext.isPlayer()) {
-            commandContext.sendMessage(Message.raw("Only players can use this command"));
-            this.logger.at(Level.WARNING).log("Player not found");
+            commandContext.sendMessage(Message.raw("Apenas jogadoes podem usar esse comando"));
+            this.logger.at(Level.WARNING).log("Jogador não encontrado");
 
             return;
         }
@@ -46,7 +46,7 @@ public class OrbCommandOff extends CommandBase {
         Ref<EntityStore> playerRef = commandContext.senderAsPlayerRef();
 
         if (Objects.isNull(playerRef) || !playerRef.isValid()) {
-            this.logger.at(Level.WARNING).log("PlayerRef not found");
+            this.logger.at(Level.WARNING).log("Referência do jogador não encontrada");
 
             return;
         }
@@ -55,7 +55,7 @@ public class OrbCommandOff extends CommandBase {
 
         manager.disable(playerUUID, world);
 
-        commandContext.sendMessage(Message.raw("Orb OFF"));
-        logger.at(Level.INFO).log("Orb OFF for %s (%s)", player.getDisplayName(), playerUUID);
+        commandContext.sendMessage(Message.raw("Lumos OFF"));
+        logger.at(Level.INFO).log("Lumos OFF para %s (UUID=%s)", player.getDisplayName(), playerUUID);
     }
 }

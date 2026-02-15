@@ -14,19 +14,19 @@ public class ListEffectsCommand extends CommandBase {
     private final HytaleLogger logger;
 
     public ListEffectsCommand(HytaleLogger logger) {
-        super("eff", "List entity effects");
+        super("eff", "Listagem das EntityEffects disponiveis");
 
         this.logger = logger.getSubLogger(SUB_LOGGER);
     }
 
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("List effects");
+        this.logger.at(Level.INFO).log("Listando EntityEffects");
 
         var map = EntityEffect.getAssetMap();
         int sizeMap = map.getAssetMap().size();
 
-        this.logger.at(Level.INFO).log("EntityEffects loaded: %d", sizeMap);
+        this.logger.at(Level.INFO).log("EntityEffects carregadas: %d", sizeMap);
 
         int shown = 0;
         int max = 80;
@@ -44,7 +44,7 @@ public class ListEffectsCommand extends CommandBase {
         }
 
         if (sizeMap > max) {
-            this.logger.at(Level.INFO).log("Showing first %d (No filter yet)", max);
+            this.logger.at(Level.INFO).log("Exibindo primeiras %d (Sem filtros)", max);
         }
     }
 }

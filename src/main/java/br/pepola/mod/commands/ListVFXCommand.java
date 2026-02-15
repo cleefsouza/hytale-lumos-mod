@@ -15,19 +15,19 @@ public class ListVFXCommand extends CommandBase {
     private final HytaleLogger logger;
 
     public ListVFXCommand(HytaleLogger logger) {
-        super("vfx", "List model vfx");
+        super("vfx", "Listagem dos ModelVFX disponiveis");
 
         this.logger = logger.getSubLogger(SUB_LOGGER);
     }
 
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("List vfx");
+        this.logger.at(Level.INFO).log("Listando ModelVFX");
 
         var map = ModelVFX.getAssetMap();
         int sizeMap = map.getAssetMap().size();
 
-        this.logger.at(Level.INFO).log("ModelVFX loaded: %d", sizeMap);
+        this.logger.at(Level.INFO).log("ModelVFX carregados: %d", sizeMap);
 
         int shown = 0;
         int max = 80;
@@ -45,7 +45,7 @@ public class ListVFXCommand extends CommandBase {
         }
 
         if (sizeMap > max) {
-            this.logger.at(Level.INFO).log("Showing first %d (No filter yet)", max);
+            this.logger.at(Level.INFO).log("Exibindo primeiros %d (Sem filtros)", max);
         }
     }
 }

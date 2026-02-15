@@ -1,6 +1,6 @@
 package br.pepola.mod.commands;
 
-import br.pepola.mod.manager.OrbManager;
+import br.pepola.mod.manager.Manager;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.Message;
@@ -15,14 +15,14 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class OrbCommandOn extends CommandBase {
+public class LumosCommandOn extends CommandBase {
 
     private final String SUB_LOGGER = "ON";
     private final HytaleLogger logger;
-    private final OrbManager manager;
+    private final Manager manager;
 
-    public OrbCommandOn(HytaleLogger logger, OrbManager manager) {
-        super("on", "Power On Command (ON)");
+    public LumosCommandOn(HytaleLogger logger, Manager manager) {
+        super("on", "Comando para ativar o Lumos (ON)");
 
         this.logger = logger.getSubLogger(SUB_LOGGER);
         this.manager = manager;
@@ -31,11 +31,11 @@ public class OrbCommandOn extends CommandBase {
     @SuppressWarnings("removal")
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Turn ON orb");
+        this.logger.at(Level.INFO).log("Lumos ON");
 
         if (!commandContext.isPlayer()) {
-            commandContext.sendMessage(Message.raw("Only players can use this command"));
-            this.logger.at(Level.WARNING).log("Player not found");
+            commandContext.sendMessage(Message.raw("Apenas jogadoes podem usar esse comando"));
+            this.logger.at(Level.WARNING).log("Jogador não encontrado");
 
             return;
         }
@@ -43,12 +43,12 @@ public class OrbCommandOn extends CommandBase {
         Player player = this.getPlayer(commandContext);
         UUID playerUUID = player.getUuid();
 
-        this.logger.at(Level.INFO).log("Player %s identified | UUID: %s", player.getDisplayName(), player.getUuid());
+        this.logger.at(Level.INFO).log("Jogador %s identificado | UUID: %s", player.getDisplayName(), player.getUuid());
 
         Ref<EntityStore> playerRef = commandContext.senderAsPlayerRef();
 
         if (Objects.isNull(playerRef) || !playerRef.isValid()) {
-            this.logger.at(Level.WARNING).log("PlayerRef not found");
+            this.logger.at(Level.WARNING).log("Referência do jogador não encontrada");
 
             return;
         }
@@ -57,8 +57,8 @@ public class OrbCommandOn extends CommandBase {
 
         manager.enable(playerUUID, world);
 
-        commandContext.sendMessage(Message.raw("Orb ON"));
-        logger.at(Level.INFO).log("Orb ON for %s (%s)", player.getDisplayName(), playerUUID);
+        commandContext.sendMessage(Message.raw("Lumos ON"));
+        logger.at(Level.INFO).log("Lumos ON para %s (UUID=%s)", player.getDisplayName(), playerUUID);
     }
 
     private Player getPlayer(CommandContext commandContext) {

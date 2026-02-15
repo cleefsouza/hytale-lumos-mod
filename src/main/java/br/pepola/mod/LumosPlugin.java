@@ -1,7 +1,7 @@
 package br.pepola.mod;
 
 import br.pepola.mod.manager.CommandCenter;
-import br.pepola.mod.manager.OrbManager;
+import br.pepola.mod.manager.Manager;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
@@ -10,24 +10,24 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.util.logging.Level;
 
-public class OrbMod extends JavaPlugin {
+public class LumosPlugin extends JavaPlugin {
 
     private final String SUB_LOGGER = "Plugin";
 
-    public OrbMod(@NonNullDecl JavaPluginInit init) {
+    public LumosPlugin(@NonNullDecl JavaPluginInit init) {
         super(init);
     }
 
     @Override
     protected void setup() {
         HytaleLogger logger = getLogger().getSubLogger(SUB_LOGGER);
-        logger.at(Level.INFO).log("Starting mod");
+        logger.at(Level.INFO).log("Iniciando mod");
 
-        OrbManager manager = new OrbManager(logger);
+        Manager manager = new Manager(logger);
 
         CommandRegistry commandRegistry = this.getCommandRegistry();
         commandRegistry.registerCommand(new CommandCenter(logger, manager));
 
-        logger.at(Level.INFO).log("Registered commands");
+        logger.at(Level.INFO).log("Comandos registrados");
     }
 }
