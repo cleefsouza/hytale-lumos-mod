@@ -1,9 +1,6 @@
 package br.pepola.mod.manager;
 
-import br.pepola.mod.commands.ListEffectsCommand;
-import br.pepola.mod.commands.ListVFXCommand;
-import br.pepola.mod.commands.LumosCommandOff;
-import br.pepola.mod.commands.LumosCommandOn;
+import br.pepola.mod.commands.*;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractCommandCollection;
 
@@ -19,7 +16,10 @@ public class CommandCenter extends AbstractCommandCollection {
 
         this.addSubCommand(new LumosCommandOn(logger, manager));
         this.addSubCommand(new LumosCommandOff(logger, manager));
-        this.addSubCommand(new ListEffectsCommand(logger));
-        this.addSubCommand(new ListVFXCommand(logger));
+
+        // apenas para desenvolvimento
+        // this.addSubCommand(new ListEffectsCommand(logger));
+        // this.addSubCommand(new ListVFXCommand(logger));
+        // this.addSubCommand(new ListParticlesCommand(logger));
     }
 }

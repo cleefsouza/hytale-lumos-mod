@@ -1,5 +1,6 @@
 package br.pepola.mod.manager;
 
+import br.pepola.mod.utils.Utils;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.logger.HytaleLogger;
@@ -8,7 +9,6 @@ import com.hypixel.hytale.server.core.modules.entity.component.DynamicLight;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -20,10 +20,10 @@ public class Manager {
 
     private boolean lumosActive = false;
 
-    private final byte RADIUS = clampByte(5);
-    private final byte RED = clampByte(14);
-    private final byte GREEN = clampByte(12);
-    private final byte BLUE = clampByte(9);
+    private final byte RADIUS = Utils.clampByte(5);
+    private final byte RED = Utils.clampByte(14);
+    private final byte GREEN = Utils.clampByte(12);
+    private final byte BLUE = Utils.clampByte(9);
 
     private final ColorLight LIGHT = new ColorLight(RADIUS, RED, GREEN, BLUE);
 
@@ -43,7 +43,7 @@ public class Manager {
             EntityStore es = world.getEntityStore();
             Ref<EntityStore> ref = es.getRefFromUUID(playerUUID);
 
-            if (isValid(ref)) {
+            if (!Utils.isValid(ref)) {
                 this.logger.at(Level.WARNING).log("Referência inválida para jogador (UUID=%s)", playerUUID);
 
                 return;
@@ -83,7 +83,7 @@ public class Manager {
 
             Ref<EntityStore> ref = es.getRefFromUUID(playerUUID);
 
-            if (isValid(ref)) {
+            if (!Utils.isValid(ref)) {
                 this.logger.at(Level.WARNING).log("Referência inválida para jogador (UUID=%s)", playerUUID);
 
                 return;
@@ -93,22 +93,5 @@ public class Manager {
 
             this.lumosActive = false;
         });
-    }
-
-    private static boolean isValid(@Nullable Ref<EntityStore> ref) {
-        return Objects.isNull(ref) || !ref.isValid();
-    }
-
-    private static byte clampByte(int value) {
-
-        if (value < 0) {
-            value = 0;
-        }
-
-        if (value > 127) {
-            value = 127;
-        }
-
-        return (byte) value;
     }
 }
