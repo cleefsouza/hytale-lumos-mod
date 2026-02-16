@@ -1,5 +1,8 @@
-# Hytale Lumos Mod ✨
+<p align="center">
+  <img width="500" height="500" alt="logo-lumos-mod" src="https://github.com/user-attachments/assets/e3e83b69-60e0-4cd4-89d6-2da8f05322d0" />
+</p>
 
+# Hytale Lumos Mod ✨
 Mod para **Hytale** que adiciona um efeito de **luz envolvendo o player**, deixando o caminho mais visível durante a exploração.
 
 https://github.com/user-attachments/assets/5094c031-841d-40da-9304-1c696c709a40
