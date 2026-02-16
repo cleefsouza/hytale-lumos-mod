@@ -1,25 +1,26 @@
 package br.pepola.mod.manager;
 
 import br.pepola.mod.commands.*;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractCommandCollection;
 
 public class CommandCenter extends AbstractCommandCollection {
 
-    private final String SUB_LOGGER = "Central";
-    private final HytaleLogger logger;
+    public static final String LUMOS = "lumos";
 
-    public CommandCenter(HytaleLogger logger, Manager manager) {
-        super("lumos", "Central de comandos do plugin");
+    public CommandCenter(Manager manager) {
+        super(LUMOS, "Central de comandos do plugin");
 
-        this.logger = logger.getSubLogger(SUB_LOGGER);
-
-        this.addSubCommand(new LumosCommandOn(logger, manager));
-        this.addSubCommand(new LumosCommandOff(logger, manager));
+        this.addSubCommand(new LumosCommandOn(manager));
+        this.addSubCommand(new LumosCommandOff(manager));
 
         // apenas para desenvolvimento
-        // this.addSubCommand(new ListEffectsCommand(logger));
-        // this.addSubCommand(new ListVFXCommand(logger));
-        // this.addSubCommand(new ListParticlesCommand(logger));
+        // this.addSubCommand(new ListEffectsCommand());
+        // this.addSubCommand(new ListVFXCommand());
+        // this.addSubCommand(new ListParticlesCommand());
+    }
+
+    @Override
+    protected boolean canGeneratePermission() {
+        return false;
     }
 }

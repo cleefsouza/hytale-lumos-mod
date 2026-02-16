@@ -1,33 +1,29 @@
 package br.pepola.mod.commands;
 
-import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.server.core.asset.type.entityeffect.config.EntityEffect;
 import com.hypixel.hytale.server.core.asset.type.modelvfx.config.ModelVFX;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.util.Objects;
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListVFXCommand extends CommandBase {
-    private final String SUB_LOGGER = "VFX";
-    private final HytaleLogger logger;
+    private final String LOGGER = ListVFXCommand.class.getName();
+    private final Logger logger = Logger.getLogger(LOGGER);
 
-    public ListVFXCommand(HytaleLogger logger) {
+    public ListVFXCommand() {
         super("vfx", "Listagem dos ModelVFX disponiveis");
-
-        this.logger = logger.getSubLogger(SUB_LOGGER);
     }
 
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Listando ModelVFX");
+        this.logger.info("Listando ModelVFX");
 
         var map = ModelVFX.getAssetMap();
         int sizeMap = map.getAssetMap().size();
 
-        this.logger.at(Level.INFO).log("ModelVFX carregados: %d", sizeMap);
+        this.logger.info(String.format("ModelVFX carregados: %d", sizeMap));
 
         int shown = 0;
         int max = 80;
@@ -39,13 +35,13 @@ public class ListVFXCommand extends CommandBase {
                 continue;
             }
 
-            this.logger.at(Level.INFO).log("- %s", vfx.getId());
+            this.logger.info(String.format("- %s", vfx.getId()));
 
             shown++;
         }
 
         if (sizeMap > max) {
-            this.logger.at(Level.INFO).log("Exibindo primeiros %d (Sem filtros)", max);
+            this.logger.info(String.format("Exibindo primeiros %d (Sem filtros)", max));
         }
     }
 }

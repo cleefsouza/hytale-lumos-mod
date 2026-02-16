@@ -1,32 +1,29 @@
 package br.pepola.mod.commands;
 
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.asset.type.particle.config.ParticleSystem;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.util.Objects;
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListParticlesCommand extends CommandBase {
-    private final String SUB_LOGGER = "Particles";
-    private final HytaleLogger logger;
+    private final String LOGGER = ListParticlesCommand.class.getName();
+    private final Logger logger = Logger.getLogger(LOGGER);
 
-    public ListParticlesCommand(HytaleLogger logger) {
+    public ListParticlesCommand() {
         super("par", "Listagem das Particles disponiveis");
-
-        this.logger = logger.getSubLogger(SUB_LOGGER);
     }
 
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Listando Particles");
+        this.logger.info("Listando Particles");
 
         var map = ParticleSystem.getAssetMap();
         int sizeMap = map.getAssetMap().size();
 
-        this.logger.at(Level.INFO).log("Particles carregadas: %d", sizeMap);
+        this.logger.info(String.format("Particles carregadas: %d", sizeMap));
 
         int shown = 0;
         int max = 100;
@@ -40,13 +37,13 @@ public class ListParticlesCommand extends CommandBase {
                 continue;
             }
 
-            this.logger.at(Level.INFO).log("- %s", entry.getValue().getId());
+            this.logger.info(String.format("- %s", entry.getValue().getId()));
 
             shown++;
         }
 
         if (sizeMap > max) {
-            this.logger.at(Level.INFO).log("Exibindo primeiras %d (Sem filtros)", max);
+            this.logger.info(String.format("Exibindo primeiras %d (Sem filtros)", max));
         }
     }
 }
