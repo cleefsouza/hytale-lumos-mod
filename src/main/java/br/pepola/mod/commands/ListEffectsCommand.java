@@ -1,32 +1,29 @@
 package br.pepola.mod.commands;
 
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.asset.type.entityeffect.config.EntityEffect;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.util.Objects;
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListEffectsCommand extends CommandBase {
-    private final String SUB_LOGGER = "Effects";
-    private final HytaleLogger logger;
+    private final String LOGGER = ListEffectsCommand.class.getName();
+    private final Logger logger = Logger.getLogger(LOGGER);
 
-    public ListEffectsCommand(HytaleLogger logger) {
+    public ListEffectsCommand() {
         super("eff", "Listagem das EntityEffects disponiveis");
-
-        this.logger = logger.getSubLogger(SUB_LOGGER);
     }
 
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Listando EntityEffects");
+        this.logger.info("Listando EntityEffects");
 
         var map = EntityEffect.getAssetMap();
         int sizeMap = map.getAssetMap().size();
 
-        this.logger.at(Level.INFO).log("EntityEffects carregadas: %d", sizeMap);
+        this.logger.info(String.format("EntityEffects carregadas: %d", sizeMap));
 
         int shown = 0;
         int max = 80;
@@ -38,13 +35,13 @@ public class ListEffectsCommand extends CommandBase {
                 continue;
             }
 
-            this.logger.at(Level.INFO).log("- %s", eff.getId());
+            this.logger.info(String.format("- %s", eff.getId()));
 
             shown++;
         }
 
         if (sizeMap > max) {
-            this.logger.at(Level.INFO).log("Exibindo primeiras %d (Sem filtros)", max);
+            this.logger.info(String.format("Exibindo primeiras %d (Sem filtros)", max));
         }
     }
 }

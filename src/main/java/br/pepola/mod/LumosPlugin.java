@@ -2,17 +2,16 @@ package br.pepola.mod;
 
 import br.pepola.mod.manager.CommandCenter;
 import br.pepola.mod.manager.Manager;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.CommandRegistry;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LumosPlugin extends JavaPlugin {
 
-    private final String SUB_LOGGER = "Plugin";
+    private final String LOGGER = LumosPlugin.class.getName();
 
     public LumosPlugin(@NonNullDecl JavaPluginInit init) {
         super(init);
@@ -20,14 +19,16 @@ public class LumosPlugin extends JavaPlugin {
 
     @Override
     protected void setup() {
-        HytaleLogger logger = getLogger().getSubLogger(SUB_LOGGER);
-        logger.at(Level.INFO).log("Iniciando mod");
+        Logger logger = Logger.getLogger(LOGGER);
+        logger.info("Iniciando mod");
 
-        Manager manager = new Manager(logger);
+//        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, AutoPerms::onPlayerReady);
+
+        Manager manager = new Manager();
 
         CommandRegistry commandRegistry = this.getCommandRegistry();
-        commandRegistry.registerCommand(new CommandCenter(logger, manager));
+        commandRegistry.registerCommand(new CommandCenter(manager));
 
-        logger.at(Level.INFO).log("Comandos registrados");
+        logger.info("Comandos registrados");
     }
 }

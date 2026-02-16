@@ -3,7 +3,6 @@ package br.pepola.mod.manager;
 import br.pepola.mod.utils.Utils;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.protocol.ColorLight;
 import com.hypixel.hytale.server.core.modules.entity.component.DynamicLight;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -11,12 +10,12 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 import java.util.Objects;
 import java.util.UUID;
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Manager {
 
-    private final String SUB_LOGGER = "Manager";
-    private final HytaleLogger logger;
+    private final String LOGGER = Manager.class.getName();
+    private final Logger logger = Logger.getLogger(LOGGER);
 
     private boolean lumosActive = false;
 
@@ -27,14 +26,13 @@ public class Manager {
 
     private final ColorLight LIGHT = new ColorLight(RADIUS, RED, GREEN, BLUE);
 
-    public Manager(HytaleLogger logger) {
-        this.logger = logger.getSubLogger(SUB_LOGGER);
+    public Manager() {
     }
 
     public void enable(UUID playerUUID, World world) {
 
         if (Objects.isNull(playerUUID) || Objects.isNull(world)) {
-            this.logger.at(Level.WARNING).log("Jogador/Mundo não encontrado");
+            this.logger.warning("Jogador/Mundo não encontrado");
 
             return;
         }
@@ -44,7 +42,7 @@ public class Manager {
             Ref<EntityStore> ref = es.getRefFromUUID(playerUUID);
 
             if (!Utils.isValid(ref)) {
-                this.logger.at(Level.WARNING).log("Referência inválida para jogador (UUID=%s)", playerUUID);
+                this.logger.warning(String.format("Referência inválida para jogador (UUID=%s)", playerUUID));
 
                 return;
             }
@@ -73,7 +71,7 @@ public class Manager {
         }
 
         if (Objects.isNull(playerUUID) || Objects.isNull(world)) {
-            this.logger.at(Level.WARNING).log("Jogador/Mundo não encontrado");
+            this.logger.warning("Jogador/Mundo não encontrado");
 
             return;
         }
@@ -84,7 +82,7 @@ public class Manager {
             Ref<EntityStore> ref = es.getRefFromUUID(playerUUID);
 
             if (!Utils.isValid(ref)) {
-                this.logger.at(Level.WARNING).log("Referência inválida para jogador (UUID=%s)", playerUUID);
+                this.logger.warning(String.format("Referência inválida para jogador (UUID=%s)", playerUUID));
 
                 return;
             }

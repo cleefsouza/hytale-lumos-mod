@@ -2,7 +2,6 @@ package br.pepola.mod.commands;
 
 import br.pepola.mod.manager.Manager;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
@@ -13,29 +12,30 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.util.Objects;
 import java.util.UUID;
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LumosCommandOff extends CommandBase {
 
-    private final String SUB_LOGGER = "OFF";
-    private final HytaleLogger logger;
+    public static final String LUMOS_OFF = "off";
+
+    private final String LOGGER = LumosCommandOff.class.getName();
+    private final Logger logger = Logger.getLogger(LOGGER);
     private final Manager manager;
 
-    public LumosCommandOff(HytaleLogger logger, Manager manager) {
-        super("off", "Comando para desativar o Lumos (OFF)");
+    public LumosCommandOff(Manager manager) {
+        super(LUMOS_OFF, "Comando para desativar o Lumos (OFF)");
 
-        this.logger = logger.getSubLogger(SUB_LOGGER);
         this.manager = manager;
     }
 
     @SuppressWarnings("removal")
     @Override
     protected void executeSync(@NonNullDecl CommandContext commandContext) {
-        this.logger.at(Level.INFO).log("Lumos OFF");
+        this.logger.info("Lumos OFF");
 
         if (!commandContext.isPlayer()) {
             commandContext.sendMessage(Message.raw("Apenas jogadoes podem usar esse comando"));
-            this.logger.at(Level.WARNING).log("Jogador não encontrado");
+            this.logger.warning("Jogador não encontrado");
 
             return;
         }
@@ -46,7 +46,7 @@ public class LumosCommandOff extends CommandBase {
         Ref<EntityStore> playerRef = commandContext.senderAsPlayerRef();
 
         if (Objects.isNull(playerRef) || !playerRef.isValid()) {
-            this.logger.at(Level.WARNING).log("Referência do jogador não encontrada");
+            this.logger.warning("Referência do jogador não encontrada");
 
             return;
         }
@@ -56,6 +56,11 @@ public class LumosCommandOff extends CommandBase {
         manager.disable(playerUUID, world);
 
         commandContext.sendMessage(Message.raw("Lumos OFF"));
-        logger.at(Level.INFO).log("Lumos OFF para %s (UUID=%s)", player.getDisplayName(), playerUUID);
+        this.logger.info(String.format("Lumos OFF para %s (UUID=%s)", player.getDisplayName(), playerUUID));
+    }
+
+    @Override
+    protected boolean canGeneratePermission() {
+        return false;
     }
 }

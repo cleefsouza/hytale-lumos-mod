@@ -11,6 +11,8 @@ https://github.com/user-attachments/assets/5094c031-841d-40da-9304-1c696c709a40
 
 ## ✨ Funcionalidades
 
+> _Antes de tudo, execute_ `/op self`
+
 - Luz/aura dinâmica ao redor do jogador para melhorar a visibilidade
 - Comando para **ligar/desligar** quando quiser:
   - `/lumos on`
@@ -47,6 +49,8 @@ Exemplo:
 ## 🎮 Como usar
 
 Dentro do jogo (no chat), use:
+
+> _Antes de tudo, execute_ `/op self`
 
 ```txt
 /lumos on
