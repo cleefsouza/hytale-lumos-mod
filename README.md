@@ -2,6 +2,8 @@
 
 Mod para **Hytale** que adiciona um efeito de **luz envolvendo o player**, deixando o caminho mais visível durante a exploração.
 
+https://github.com/user-attachments/assets/5094c031-841d-40da-9304-1c696c709a40
+
 ---
 
 ## ✨ Funcionalidades
